@@ -34,59 +34,76 @@ public class Tokenizer implements ITokenizer {
 			scanner.moveNext();
 		}
 
+		if(scanner.current() == scanner.EOF){
+			current = new Lexeme("EOF", Token.EOF);
+			return;
+		}
+
 		switch (scanner.current()){
 			case '{':
 				current = new Lexeme("{", Token.LEFT_CURLY);
+				scanner.moveNext();
 				break;
 			case '}':
 				current = new Lexeme("}", Token.RIGHT_CURLY);
+				scanner.moveNext();
 				break;
 			case '=':
 				current = new Lexeme("=", Token.ASSIGN_OP);
+				scanner.moveNext();
 				break;
 			case ';':
 				current = new Lexeme(";", Token.SEMICOLON);
+				scanner.moveNext();
 				break;
 			case '+':
 				current = new Lexeme("+", Token.ADD_OP);
+				scanner.moveNext();
 				break;
 			case '-':
 				current = new Lexeme("-", Token.SUB_OP);
+				scanner.moveNext();
 				break;
 			case '*':
 				current = new Lexeme("*", Token.MULT_OP);
+				scanner.moveNext();
 				break;
 			case '/':
 				current = new Lexeme("/", Token.DIV_OP);
+				scanner.moveNext();
 				break;
 			case '(':
 				current = new Lexeme("(", Token.LEFT_PAREN);
+				scanner.moveNext();
 				break;
 			case ')':
 				current = new Lexeme(")", Token.RIGHT_PAREN);
+				scanner.moveNext();
 				break;
 
 			default:
+				char firstChar = scanner.current();
 				String word = "";
 
-				while (!Character.isWhitespace(scanner.current())) {
-					word += scanner.current();
-					scanner.moveNext();
-				}
-
-				char  firstChar = word.charAt(0);
-
 				if (Character.isLetter(firstChar)) {
+					while (Character.isLetter(scanner.current())) {
+						word += scanner.current();
+						scanner.moveNext();
+					}
 					current = new Lexeme(word, Token.IDENT);
 
 				} else if (Character.isDigit(firstChar)) {
-
+					while (Character.isDigit(scanner.current())) {
+						word += scanner.current();
+						scanner.moveNext();
+					}
 					Integer value = new Integer(Integer.parseInt(word));
 					current = new Lexeme(value, Token.INT_LIT);
+				} else {
+					throw new TokenizerException("Illegal character: "+firstChar);
 				}
 				break;
 		}
-		scanner.moveNext();
 	}
 
 	@Override
