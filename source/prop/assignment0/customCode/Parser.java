@@ -27,6 +27,11 @@ public class Parser implements IParser {
 
 	@Override
 	public INode parse() throws IOException, TokenizerException, ParserException {
+		tokenizer.moveNext();
+		while(tokenizer != null){
+			System.out.println(tokenizer.current());
+			tokenizer.moveNext();
+		}
 		return null;
 	}
 

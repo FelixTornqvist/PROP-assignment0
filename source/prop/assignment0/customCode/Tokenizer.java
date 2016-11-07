@@ -25,39 +25,48 @@ public class Tokenizer implements ITokenizer {
 
 	@Override
 	public Lexeme current() {
-
-
 		return current;
 	}
 
 	@Override
 	public void moveNext() throws IOException, TokenizerException {
-
+		while(Character.isWhitespace(scanner.current())){
+			scanner.moveNext();
+		}
 
 		switch (scanner.current()){
 			case '{':
+				current = new Lexeme("{", Token.LEFT_CURLY);
 				break;
 			case '}':
+				current = new Lexeme("}", Token.RIGHT_CURLY);
 				break;
 			case '=':
+				current = new Lexeme("=", Token.ASSIGN_OP);
 				break;
 			case ';':
+				current = new Lexeme(";", Token.SEMICOLON);
 				break;
 			case '+':
+				current = new Lexeme("+", Token.ADD_OP);
 				break;
 			case '-':
+				current = new Lexeme("-", Token.SUB_OP);
 				break;
 			case '*':
+				current = new Lexeme("*", Token.MULT_OP);
 				break;
 			case '/':
+				current = new Lexeme("/", Token.DIV_OP);
 				break;
 			case '(':
+				current = new Lexeme("(", Token.LEFT_PAREN);
 				break;
 			case ')':
+				current = new Lexeme(")", Token.RIGHT_PAREN);
 				break;
 
 			default:
-
 				String word = "";
 
 				while (!Character.isWhitespace(scanner.current())) {
@@ -73,11 +82,11 @@ public class Tokenizer implements ITokenizer {
 				} else if (Character.isDigit(firstChar)) {
 
 					Integer value = new Integer(Integer.parseInt(word));
-					current = new Lexeme(value, Token.IDENT);
+					current = new Lexeme(value, Token.INT_LIT);
 				}
-
 				break;
 		}
+		scanner.moveNext();
 	}
 
 	@Override
