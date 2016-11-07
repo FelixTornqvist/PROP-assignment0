@@ -11,14 +11,17 @@ import prop.assignment0.TokenizerException;
 
 import java.io.IOException;
 
-public class Parser implements IParser{
+public class Parser implements IParser {
+	private Tokenizer tokenizer;
 
-	public Parser(){
+	public Parser() {
 
 	}
 
 	@Override
 	public void open(String fileName) throws IOException, TokenizerException {
+		tokenizer = new Tokenizer();
+		tokenizer.open(fileName);
 
 	}
 
