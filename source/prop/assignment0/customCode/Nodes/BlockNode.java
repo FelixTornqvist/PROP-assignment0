@@ -9,7 +9,12 @@ import prop.assignment0.INode;
 import java.util.ArrayList;
 
 public class BlockNode implements INode {
-	ArrayList<StatementsNode> children = new ArrayList<>();
+	private StatementsNode child;
+
+	public BlockNode(StatementsNode statementsNode) {
+		this.child = statementsNode;
+
+	}
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
@@ -21,7 +26,4 @@ public class BlockNode implements INode {
 
 	}
 
-	public void addStatement(StatementsNode node){
-		children.add(node);
-	}
 }
