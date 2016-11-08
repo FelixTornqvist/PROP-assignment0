@@ -5,6 +5,7 @@
 package prop.assignment0.customCode;
 
 import prop.assignment0.*;
+import prop.assignment0.customCode.Nodes.AssignmentNode;
 import prop.assignment0.customCode.Nodes.BlockNode;
 import prop.assignment0.customCode.Nodes.StatementsNode;
 
@@ -71,9 +72,36 @@ public class Parser implements IParser {
 	}
 
 	private StatementsNode parseStatementsNode() throws IOException, TokenizerException, ParserException {
+		StatementsNode statementsNode;
+
+		if (tokenizer.current().token() == Token.IDENT) {
 
 
+
+			statementsNode = new StatementsNode(parseAssignmentNode(), parseStatementsNode());
+
+		} else {
+			statementsNode = new StatementsNode();
+		}
+
+
+		return statementsNode;
+	}
+
+	private AssignmentNode parseAssignmentNode() throws IOException, TokenizerException, ParserException {
+		AssignmentNode assignmentNode = new AssignmentNode();
+		Lexeme id = tokenizer.current();
 		tokenizer.moveNext();
+
+		if (tokenizer.current().token() == Token.ASSIGN_OP) {
+			tokenizer.moveNext();
+			if () {
+
+			}
+
+		}
+
+
 		return null;
 	}
 
