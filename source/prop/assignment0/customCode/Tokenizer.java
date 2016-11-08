@@ -34,7 +34,7 @@ public class Tokenizer implements ITokenizer {
 			scanner.moveNext();
 		}
 
-		if(scanner.current() == scanner.EOF){
+		if (scanner.current() == scanner.EOF) {
 			current = new Lexeme("EOF", Token.EOF);
 			return;
 		}
@@ -85,8 +85,8 @@ public class Tokenizer implements ITokenizer {
 				char firstChar = scanner.current();
 				String word = "";
 
-				if (Character.isLetter(firstChar)) {
-					while (Character.isLetter(scanner.current())) {
+				if (validChar(firstChar)) {
+					while (validChar(scanner.current())) {
 						word += scanner.current();
 						scanner.moveNext();
 					}
@@ -100,10 +100,14 @@ public class Tokenizer implements ITokenizer {
 					Integer value = new Integer(Integer.parseInt(word));
 					current = new Lexeme(value, Token.INT_LIT);
 				} else {
-					throw new TokenizerException("Illegal character: "+firstChar);
+					throw new TokenizerException("Illegal character: " + firstChar);
 				}
 				break;
 		}
+	}
+
+	private boolean validChar(char c) {
+		return (c >= 'a' && c <= 'z');
 	}
 
 	@Override
