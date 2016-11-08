@@ -4,10 +4,7 @@
 
 package prop.assignment0.customCode;
 
-import prop.assignment0.INode;
-import prop.assignment0.IParser;
-import prop.assignment0.ParserException;
-import prop.assignment0.TokenizerException;
+import prop.assignment0.*;
 
 import java.io.IOException;
 
@@ -28,8 +25,8 @@ public class Parser implements IParser {
 	@Override
 	public INode parse() throws IOException, TokenizerException, ParserException {
 		tokenizer.moveNext();
-		while(tokenizer != null){
-			System.out.println(tokenizer.current());
+
+		while (tokenizer.current().token() != Token.EOF) {
 			tokenizer.moveNext();
 		}
 		return null;
