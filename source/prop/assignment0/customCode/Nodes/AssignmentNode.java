@@ -29,5 +29,7 @@ public class AssignmentNode implements INode {
 		Utils.addIndentedStringLine(builder, "ASSIGN_OP =", tabs + 1);
 
 		expressionNode.buildString(builder, tabs+1);
+
+		Utils.addIndentedStringLine(builder, "SEMICOLON ;", tabs + 1);
 	}
 }

@@ -31,13 +31,15 @@ public class TermNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-		Utils.tabIndenter(builder, tabs);
-		builder.append("TermNode");
-		builder.append(System.getProperty("line.separator"));
-		tabs++;
+		Utils.addIndentedStringLine(builder, "TermNode", tabs);
 
 		if (factorNode != null) {
-			factorNode.buildString(builder, tabs);
+			factorNode.buildString(builder, tabs + 1);
+
+			if (op != null && termNode != null) {
+				Utils.addIndentedStringLine(builder, op.toString(), tabs + 1);
+				termNode.buildString(builder, tabs + 1);
+			}
 		}
 
 	}
