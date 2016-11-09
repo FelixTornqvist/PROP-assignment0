@@ -6,16 +6,13 @@ package prop.assignment0.customCode.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
-import prop.assignment0.Token;
-
-import java.util.ArrayList;
 
 public class BlockNode implements INode {
-	private StatementsNode child;
+	private StatementsNode statementsChild;
 	private Lexeme right, left;
 
 	public BlockNode(StatementsNode statementsNode) {
-		this.child = statementsNode;
+		this.statementsChild = statementsNode;
 	}
 
 	@Override
@@ -25,16 +22,13 @@ public class BlockNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-		builder.append("BlockNode");
-		builder.append(System.getProperty("line.separator"));
-		tabs ++;
-		Utils.tabIndenter(builder, tabs);
-		builder.append("LEFT_CURLY {");
-		builder.append(System.getProperty("line.separator"));
-		tabs ++;
-		this.child.buildString(builder, tabs);
+		Utils.addIndentedStringLine(builder, "BlockNode", tabs);
 
-		builder.append("RIGHT_CURLY }");
+		Utils.addIndentedStringLine(builder, "LEFT_CURLY {", tabs + 1);
+
+		this.statementsChild.buildString(builder, tabs + 2);
+
+		Utils.addIndentedStringLine(builder, "RIGHT_CURLY }", tabs + 1);
 	}
 
 

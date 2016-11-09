@@ -26,14 +26,11 @@ public class StatementsNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-		Utils.tabIndenter(builder, tabs);
-		builder.append("StatementsNode");
-		builder.append(System.getProperty("line.separator"));
-		tabs++;
+		Utils.addIndentedStringLine(builder, "StatementsNode", tabs);
 
 		if (assignmentNode != null && statementsNode != null) {
-			assignmentNode.buildString(builder, tabs);
-			statementsNode.buildString(builder, tabs);
+			assignmentNode.buildString(builder, tabs+1);
+			statementsNode.buildString(builder, tabs+1);
 		}
 
 

@@ -11,4 +11,10 @@ public class Utils {
 			builder.append('\t');
 		}
 	}
+
+	public static void addIndentedStringLine(StringBuilder builder, String str, int tabs){
+		tabIndenter(builder, tabs);
+		builder.append(str);
+		builder.append(System.getProperty("line.separator"));
+	}
 }
