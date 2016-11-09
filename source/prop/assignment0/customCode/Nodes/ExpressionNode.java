@@ -30,6 +30,15 @@ public class ExpressionNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
+		Utils.tabIndenter(builder, tabs);
+		builder.append("ExpressionNode");
+		builder.append(System.getProperty("line.separator"));
+		tabs++;
+
+//		if (assignmentNode != null && statementsNode != null) {
+//			assignmentNode.buildString(builder, tabs);
+//			statementsNode.buildString(builder, tabs);
+//		}
 
 	}
 }

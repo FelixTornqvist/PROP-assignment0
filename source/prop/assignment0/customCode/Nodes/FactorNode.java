@@ -26,6 +26,20 @@ public class FactorNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
+		Utils.tabIndenter(builder, tabs);
+		builder.append("FactorNode");
+		builder.append(System.getProperty("line.separator"));
+		tabs++;
+
+		if (expressionNode != null) {
+			builder.append("(");
+			builder.append(System.getProperty("line.separator"));
+			tabs++;
+			expressionNode.buildString(builder, tabs);
+
+			builder.append(")");
+			builder.append(System.getProperty("line.separator"));
+		}
 
 	}
 }
