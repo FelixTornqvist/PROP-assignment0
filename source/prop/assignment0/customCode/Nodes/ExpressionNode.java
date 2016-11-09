@@ -35,10 +35,10 @@ public class ExpressionNode implements INode {
 		builder.append(System.getProperty("line.separator"));
 		tabs++;
 
-//		if (assignmentNode != null && statementsNode != null) {
-//			assignmentNode.buildString(builder, tabs);
-//			statementsNode.buildString(builder, tabs);
-//		}
+		if (termNode != null) {
+			termNode.buildString(builder, tabs);
+		}
+
 
 	}
 }
