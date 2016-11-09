@@ -24,16 +24,10 @@ public class AssignmentNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-		Utils.tabIndenter(builder, tabs);
-		builder.append("AssignmentNode");
-		builder.append(System.getProperty("line.separator"));
+		Utils.addIndentedStringLine(builder, "AssignmentNode", tabs);
+		Utils.addIndentedStringLine(builder, id.token() + " " + id.value(), tabs + 1);
+		Utils.addIndentedStringLine(builder, "ASSIGN_OP =", tabs + 1);
 
-
-//		ident
-//		ASSIGN_OP =
-		tabs++;
-
-
-		expressionNode.buildString(builder, tabs);
+		expressionNode.buildString(builder, tabs+1);
 	}
 }
