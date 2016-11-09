@@ -25,7 +25,7 @@ public class AssignmentNode implements INode {
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
 		Utils.addIndentedStringLine(builder, "AssignmentNode", tabs);
-		Utils.addIndentedStringLine(builder, id.token() + " " + id.value(), tabs + 1);
+		Utils.addIndentedStringLine(builder, id.toString(), tabs + 1);
 		Utils.addIndentedStringLine(builder, "ASSIGN_OP =", tabs + 1);
 
 		expressionNode.buildString(builder, tabs+1);
