@@ -95,48 +95,52 @@ public class Parser implements IParser {
 	}
 
 	private ExpressionNode parseExpressionNode() throws IOException, TokenizerException, ParserException {
-
 		TermNode termNode = parseTermNode();
 
 		if (tokenizer.current().token() == Token.ADD_OP || tokenizer.current().token() == Token.SUB_OP) {
 			Lexeme op = tokenizer.current();
-
 			tokenizer.moveNext();
 			return new ExpressionNode(termNode, op, parseExpressionNode());
 		}
-
 		return new ExpressionNode(termNode);
 	}
 
 	private TermNode parseTermNode() throws IOException, TokenizerException, ParserException {
-
 		FactorNode factorNode = parseFactorNode();
 
 		if (tokenizer.current().token() == Token.MULT_OP || tokenizer.current().token() == Token.DIV_OP) {
 			Lexeme op = tokenizer.current();
-
 			tokenizer.moveNext();
 
 			return new TermNode(factorNode, op, parseTermNode());
 		}
-
-
 		return new TermNode(factorNode);
 	}
 
 	private FactorNode parseFactorNode() throws IOException, TokenizerException, ParserException {
-		if (tokenizer.current().token() == Token.INT_LIT) {
+		ExpressionNode expressionNode;
+
+		if (tokenizer.current().token() == Token.INT_LIT || tokenizer.current().token() == Token.IDENT) {
 			FactorNode factorNode = new FactorNode(tokenizer.current());
 			tokenizer.moveNext();
 			return factorNode;
+
+		} else if (tokenizer.current().token() == Token.LEFT_PAREN) {
+			tokenizer.moveNext();
+			expressionNode = parseExpressionNode();
+			tokenizer.moveNext();
+
+			if (tokenizer.current().token() == Token.RIGHT_PAREN) {
+				tokenizer.moveNext();
+				return new FactorNode(expressionNode);
+
+			} else {
+			throw new ParserException("Right parenthesis not found");
+		}
 
 		} else {
 			throw new ParserException("Factor not found");
 		}
 
-
-
 	}
-
-
 }

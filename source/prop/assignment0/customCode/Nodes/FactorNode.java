@@ -9,9 +9,14 @@ import prop.assignment0.Lexeme;
 
 public class FactorNode implements INode {
 	private Lexeme lexeme;
+	private ExpressionNode expressionNode;
 
 	public FactorNode(Lexeme lexeme) {
 		this.lexeme = lexeme;
+	}
+
+	public FactorNode(ExpressionNode expressionNode) {
+		this.expressionNode = expressionNode;
 	}
 
 	@Override
