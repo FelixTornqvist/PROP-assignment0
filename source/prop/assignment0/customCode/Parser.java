@@ -5,9 +5,7 @@
 package prop.assignment0.customCode;
 
 import prop.assignment0.*;
-import prop.assignment0.customCode.Nodes.AssignmentNode;
-import prop.assignment0.customCode.Nodes.BlockNode;
-import prop.assignment0.customCode.Nodes.StatementsNode;
+import prop.assignment0.customCode.Nodes.*;
 
 import java.io.IOException;
 
@@ -28,12 +26,11 @@ public class Parser implements IParser {
 	@Override
 	public INode parse() throws IOException, TokenizerException, ParserException {
 		tokenizer.moveNext();
-		parseBlockNode();
+		return parseBlockNode();
 
 //		while (tokenizer.current().token() != Token.EOF) {
 //			tokenizer.moveNext();
 //		}
-		return null;
 	}
 
 	@Override
@@ -42,26 +39,18 @@ public class Parser implements IParser {
 	}
 
 	private BlockNode parseBlockNode() throws IOException, TokenizerException, ParserException {
-
 		BlockNode blockNode;
 
 		if (tokenizer.current().token() == Token.LEFT_CURLY) {
-
-			tokenizer.moveNext();
 			StatementsNode statementNode = parseStatementsNode();
-
-
 
 			if (tokenizer.current().token() == Token.RIGHT_CURLY) {
 				blockNode = new BlockNode(statementNode);
 
-
-
-
 			} else {
+				System.out.println(tokenizer.current().token());
 				throw new ParserException("Right curly bracket missing");
 			}
-
 
 		} else {
 			throw new ParserException("Left curly bracket missing");
@@ -73,36 +62,80 @@ public class Parser implements IParser {
 
 	private StatementsNode parseStatementsNode() throws IOException, TokenizerException, ParserException {
 		StatementsNode statementsNode;
+		tokenizer.moveNext();
 
 		if (tokenizer.current().token() == Token.IDENT) {
-
-
-
 			statementsNode = new StatementsNode(parseAssignmentNode(), parseStatementsNode());
 
 		} else {
 			statementsNode = new StatementsNode();
 		}
-
-
 		return statementsNode;
 	}
 
 	private AssignmentNode parseAssignmentNode() throws IOException, TokenizerException, ParserException {
-		AssignmentNode assignmentNode = new AssignmentNode();
+		ExpressionNode expressionNode;
 		Lexeme id = tokenizer.current();
 		tokenizer.moveNext();
 
 		if (tokenizer.current().token() == Token.ASSIGN_OP) {
 			tokenizer.moveNext();
-			if () {
+			expressionNode = parseExpressionNode();
 
+			if (tokenizer.current().token() == Token.SEMICOLON) {
+				return new AssignmentNode(id, expressionNode);
+
+			} else {
+				throw new ParserException("Semicolon not found");
 			}
 
 		}
 
-
 		return null;
+	}
+
+	private ExpressionNode parseExpressionNode() throws IOException, TokenizerException, ParserException {
+
+		TermNode termNode = parseTermNode();
+
+		if (tokenizer.current().token() == Token.ADD_OP || tokenizer.current().token() == Token.SUB_OP) {
+			Lexeme op = tokenizer.current();
+
+			tokenizer.moveNext();
+			return new ExpressionNode(termNode, op, parseExpressionNode());
+		}
+
+		return new ExpressionNode(termNode);
+	}
+
+	private TermNode parseTermNode() throws IOException, TokenizerException, ParserException {
+
+		FactorNode factorNode = parseFactorNode();
+
+		if (tokenizer.current().token() == Token.MULT_OP || tokenizer.current().token() == Token.DIV_OP) {
+			Lexeme op = tokenizer.current();
+
+			tokenizer.moveNext();
+
+			return new TermNode(factorNode, op, parseTermNode());
+		}
+
+
+		return new TermNode(factorNode);
+	}
+
+	private FactorNode parseFactorNode() throws IOException, TokenizerException, ParserException {
+		if (tokenizer.current().token() == Token.INT_LIT) {
+			FactorNode factorNode = new FactorNode(tokenizer.current());
+			tokenizer.moveNext();
+			return factorNode;
+
+		} else {
+			throw new ParserException("Factor not found");
+		}
+
+
+
 	}
 
 
