@@ -128,13 +128,13 @@ public class Parser implements IParser {
 		} else if (tokenizer.current().token() == Token.LEFT_PAREN) {
 			tokenizer.moveNext();
 			expressionNode = parseExpressionNode();
-			tokenizer.moveNext();
 
 			if (tokenizer.current().token() == Token.RIGHT_PAREN) {
 				tokenizer.moveNext();
 				return new FactorNode(expressionNode);
 
 			} else {
+
 			throw new ParserException("Right parenthesis not found");
 		}
 
