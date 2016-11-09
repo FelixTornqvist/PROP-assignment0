@@ -113,8 +113,9 @@ public class Parser implements IParser {
 			tokenizer.moveNext();
 
 			return new TermNode(factorNode, op, parseTermNode());
+		} else {
+			return new TermNode(factorNode);
 		}
-		return new TermNode(factorNode);
 	}
 
 	private FactorNode parseFactorNode() throws IOException, TokenizerException, ParserException {

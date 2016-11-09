@@ -9,18 +9,18 @@ import prop.assignment0.Lexeme;
 
 public class ExpressionNode implements INode {
 
-	private TermNode termNode;
+	private TermNode termChild;
 	private Lexeme op;
-	private ExpressionNode expr;
+	private ExpressionNode exprChild;
 
-	public ExpressionNode(TermNode termNode) {
-		this.termNode = termNode;
+	public ExpressionNode(TermNode termChild) {
+		this.termChild = termChild;
 	}
 
-	public ExpressionNode(TermNode termNode, Lexeme op, ExpressionNode expr) {
-		this.termNode = termNode;
+	public ExpressionNode(TermNode termChild, Lexeme op, ExpressionNode exprChild) {
+		this.termChild = termChild;
 		this.op = op;
-		this.expr = expr;
+		this.exprChild = exprChild;
 	}
 
 	@Override
@@ -30,15 +30,12 @@ public class ExpressionNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-		Utils.tabIndenter(builder, tabs);
-		builder.append("ExpressionNode");
-		builder.append(System.getProperty("line.separator"));
-		tabs++;
+		Utils.addIndentedStringLine(builder, "ExpressionNode", tabs);
 
-		if (termNode != null) {
-			termNode.buildString(builder, tabs);
+		if (termChild != null && op != null && exprChild != null) {
+			this.termChild.buildString(builder, tabs + 1);
+			Utils.addIndentedStringLine(builder, op.toString(), tabs + 1);
+			this.exprChild.buildString(builder, tabs + 1);
 		}
-
-
 	}
 }
