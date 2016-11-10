@@ -6,6 +6,8 @@ package prop.assignment0.customCode.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
+import prop.assignment0.Token;
+import prop.assignment0.customCode.VariableContainer;
 
 public class FactorNode implements INode {
 	private Lexeme lexeme;
@@ -21,7 +23,23 @@ public class FactorNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		return null;
+		System.out.println("          factor begin: "+((lexeme != null)?lexeme.value():""));
+		Float result = new Float(0);
+
+		if(lexeme != null){
+			if(lexeme.token() == Token.IDENT){
+				String varName = lexeme.value().toString();
+				result = VariableContainer.getValue(varName);
+			} else if (lexeme.token() == Token.INT_LIT){
+				result = (Float) lexeme.value();
+			}
+
+		}else if(exprChild != null){
+			result = (Float) exprChild.evaluate(null);
+		}
+
+		System.out.println("          factor end: "+result);
+		return result;
 	}
 
 	@Override

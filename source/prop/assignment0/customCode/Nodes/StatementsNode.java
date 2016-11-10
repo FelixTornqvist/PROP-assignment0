@@ -22,10 +22,14 @@ public class StatementsNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		VariableContainer.setValue("a", new Float(1));
-		VariableContainer.setValue("b", new Float(2));
-		VariableContainer.setValue("c", new Float(3));
+		System.out.println("statement begin");
 
+		if(assignmentNode != null && statementsNode != null) {
+			assignmentNode.evaluate(null);
+			statementsNode.evaluate(null);
+		}
+
+		System.out.println("statement end");
 		return null;
 	}
 

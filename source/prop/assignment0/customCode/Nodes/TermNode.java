@@ -6,6 +6,7 @@ package prop.assignment0.customCode.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
+import prop.assignment0.Token;
 
 public class TermNode implements INode {
 
@@ -17,7 +18,6 @@ public class TermNode implements INode {
 		this.factorNode = factorNode;
 	}
 
-
 	public TermNode(FactorNode factorNode, Lexeme op, TermNode termNode) {
 		this.factorNode = factorNode;
 		this.op = op;
@@ -26,7 +26,25 @@ public class TermNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		return null;
+		System.out.println("        term begin: "+((op != null)?op.token():"factor only"));
+
+		Float result = new Float(0);
+
+		Float factorEval = (Float) factorNode.evaluate(null);
+
+		if (op != null && termNode != null) {
+			Float termEval = (Float) termNode.evaluate(null);
+
+			if (op.token() == Token.MULT_OP){
+				result = factorEval * termEval;
+			} else if (op.token() == Token.DIV_OP){
+				result = factorEval / termEval;
+			}
+		} else {
+			result = factorEval;
+		}
+		System.out.println("        term end: "+result);
+		return result;
 	}
 
 	@Override

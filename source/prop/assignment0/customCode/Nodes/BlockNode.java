@@ -20,6 +20,8 @@ public class BlockNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
+		System.out.println("------------------EVALUATE BEGIN------------------------");
+
 		String ret = "";
 		statementsChild.evaluate(null);
 

@@ -6,6 +6,7 @@ package prop.assignment0.customCode.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
+import prop.assignment0.customCode.VariableContainer;
 
 public class AssignmentNode implements INode {
 
@@ -19,6 +20,13 @@ public class AssignmentNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
+		System.out.println("    assign begin: "+id.value());
+
+		Float exprEval = (Float) expressionNode.evaluate(null);
+
+		VariableContainer.setValue(id.value().toString(), exprEval);
+
+		System.out.println("    assign end: "+exprEval);
 		return null;
 	}
 

@@ -6,6 +6,7 @@ package prop.assignment0.customCode.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
+import prop.assignment0.Token;
 
 public class ExpressionNode implements INode {
 
@@ -25,7 +26,25 @@ public class ExpressionNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		return null;
+		System.out.println("      expr begin: "+((op != null)?op.token():"term only"));
+		Float result = new Float(0);
+
+		Float termEval = (Float) termChild.evaluate(null);
+
+		if (op != null && exprChild != null) {
+			Float exprEval = (Float) exprChild.evaluate(null);
+
+			if (op.token() == Token.SUB_OP){
+				result = termEval - exprEval;
+			} else if (op.token() == Token.ADD_OP){
+				result = termEval + exprEval;
+			}
+		} else {
+			result = termEval;
+		}
+
+		System.out.println("      expr end: "+result);
+		return result;
 	}
 
 	@Override
