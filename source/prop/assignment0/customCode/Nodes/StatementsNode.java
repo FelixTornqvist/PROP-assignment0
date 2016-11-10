@@ -4,6 +4,7 @@
 
 package prop.assignment0.customCode.Nodes;
 
+import prop.assignment0.customCode.VariableContainer;
 import prop.assignment0.INode;
 
 public class StatementsNode implements INode {
@@ -21,6 +22,10 @@ public class StatementsNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
+		VariableContainer.setValue("a", new Float(1));
+		VariableContainer.setValue("b", new Float(2));
+		VariableContainer.setValue("c", new Float(3));
+
 		return null;
 	}
 

@@ -6,6 +6,9 @@ package prop.assignment0.customCode.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
+import prop.assignment0.customCode.VariableContainer;
+
+import java.util.Map;
 
 public class BlockNode implements INode {
 	private StatementsNode statementsChild;
@@ -17,7 +20,14 @@ public class BlockNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		return null;
+		String ret = "";
+		statementsChild.evaluate(null);
+
+		for(Map.Entry var : VariableContainer.getKeySet()){
+			ret += var.getKey() + " = " + var.getValue() + '\n';
+		}
+
+		return ret;
 	}
 
 	@Override
