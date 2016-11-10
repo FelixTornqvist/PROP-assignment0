@@ -35,7 +35,6 @@ public class ExpressionNode implements INode {
 
 		if (op != null && exprChild != null) {
 			Utils.addIndentedStringLine(builder, op.toString(), tabs + 1);
-			System.out.println(op.toString());
 			this.exprChild.buildString(builder, tabs + 1);
 		}
 	}

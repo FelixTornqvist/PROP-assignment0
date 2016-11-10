@@ -48,7 +48,6 @@ public class Parser implements IParser {
 				blockNode = new BlockNode(statementNode);
 
 			} else {
-				System.out.println(tokenizer.current().token());
 				throw new ParserException("Right curly bracket missing");
 			}
 
@@ -66,7 +65,6 @@ public class Parser implements IParser {
 
 		if (tokenizer.current().token() == Token.IDENT) {
 			statementsNode = new StatementsNode(parseAssignmentNode(), parseStatementsNode());
-
 		} else {
 			statementsNode = new StatementsNode();
 		}
@@ -88,7 +86,6 @@ public class Parser implements IParser {
 			} else {
 				throw new ParserException("Semicolon not found");
 			}
-
 		}
 
 		return null;
@@ -129,19 +126,14 @@ public class Parser implements IParser {
 		} else if (tokenizer.current().token() == Token.LEFT_PAREN) {
 			tokenizer.moveNext();
 			expressionNode = parseExpressionNode();
-			if (expressionNode != null) {
-				System.out.println("expr node created ");
-			}
-
 
 			if (tokenizer.current().token() == Token.RIGHT_PAREN) {
 				tokenizer.moveNext();
 				return new FactorNode(expressionNode);
 
 			} else {
-
 			throw new ParserException("Right parenthesis not found");
-		}
+			}
 
 		} else {
 			throw new ParserException("Factor not found");
