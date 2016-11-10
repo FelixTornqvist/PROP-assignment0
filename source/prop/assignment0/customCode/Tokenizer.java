@@ -97,7 +97,7 @@ public class Tokenizer implements ITokenizer {
 						word += scanner.current();
 						scanner.moveNext();
 					}
-					Integer value = new Integer(Integer.parseInt(word));
+					Float value = new Float(Integer.parseInt(word));
 					current = new Lexeme(value, Token.INT_LIT);
 				} else {
 					throw new TokenizerException("Illegal character: " + firstChar);

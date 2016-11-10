@@ -33,11 +33,11 @@ public class FactorNode implements INode {
 		}
 
 		if (this.exprChild != null) {
-			Utils.addIndentedStringLine(builder, "LEFT_PAREN ( ", tabs + 1);
+			Utils.addIndentedStringLine(builder, "LEFT_PAREN (", tabs + 1);
 
 			/** looks weird to me to not add tabs with 2 but according to facit it's correct */
 			this.exprChild.buildString(builder, tabs + 1);
-			Utils.addIndentedStringLine(builder, "RIGHT_PAREN ) ", tabs + 1);
+			Utils.addIndentedStringLine(builder, "RIGHT_PAREN )", tabs + 1);
 		}
 	}
 }
