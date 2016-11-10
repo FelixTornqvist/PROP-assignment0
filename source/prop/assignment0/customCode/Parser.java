@@ -129,6 +129,10 @@ public class Parser implements IParser {
 		} else if (tokenizer.current().token() == Token.LEFT_PAREN) {
 			tokenizer.moveNext();
 			expressionNode = parseExpressionNode();
+			if (expressionNode != null) {
+				System.out.println("expr node created ");
+			}
+
 
 			if (tokenizer.current().token() == Token.RIGHT_PAREN) {
 				tokenizer.moveNext();

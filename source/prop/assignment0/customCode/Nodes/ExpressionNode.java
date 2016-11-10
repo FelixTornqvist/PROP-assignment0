@@ -31,10 +31,11 @@ public class ExpressionNode implements INode {
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
 		Utils.addIndentedStringLine(builder, "ExpressionNode", tabs);
+		this.termChild.buildString(builder, tabs + 1);
 
-		if (termChild != null && op != null && exprChild != null) {
-			this.termChild.buildString(builder, tabs + 1);
+		if (op != null && exprChild != null) {
 			Utils.addIndentedStringLine(builder, op.toString(), tabs + 1);
+			System.out.println(op.toString());
 			this.exprChild.buildString(builder, tabs + 1);
 		}
 	}

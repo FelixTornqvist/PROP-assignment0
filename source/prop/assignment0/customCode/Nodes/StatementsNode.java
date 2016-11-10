@@ -29,8 +29,8 @@ public class StatementsNode implements INode {
 		Utils.addIndentedStringLine(builder, "StatementsNode", tabs);
 
 		if (assignmentNode != null && statementsNode != null) {
-			assignmentNode.buildString(builder, tabs+1);
-			statementsNode.buildString(builder, tabs+1);
+			assignmentNode.buildString(builder, tabs + 1);
+			statementsNode.buildString(builder, tabs + 1);
 		}
 
 

@@ -9,14 +9,14 @@ import prop.assignment0.Lexeme;
 
 public class FactorNode implements INode {
 	private Lexeme lexeme;
-	private ExpressionNode expressionNode;
+	private ExpressionNode exprChild;
 
 	public FactorNode(Lexeme lexeme) {
 		this.lexeme = lexeme;
 	}
 
-	public FactorNode(ExpressionNode expressionNode) {
-		this.expressionNode = expressionNode;
+	public FactorNode(ExpressionNode exprChild) {
+		this.exprChild = exprChild;
 	}
 
 	@Override
@@ -26,20 +26,16 @@ public class FactorNode implements INode {
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-		Utils.tabIndenter(builder, tabs);
-		builder.append("FactorNode");
-		builder.append(System.getProperty("line.separator"));
-		tabs++;
+		Utils.addIndentedStringLine(builder, "FactorNode", tabs);
 
-		if (expressionNode != null) {
-			builder.append("(");
-			builder.append(System.getProperty("line.separator"));
-			tabs++;
-			expressionNode.buildString(builder, tabs);
-
-			builder.append(")");
-			builder.append(System.getProperty("line.separator"));
+		if (lexeme != null) {
+			Utils.addIndentedStringLine(builder, lexeme.toString(), tabs + 1);
 		}
 
+		if (this.exprChild != null) {
+			Utils.addIndentedStringLine(builder, "LEFT_PAREN ( ", tabs + 1);
+			this.exprChild.buildString(builder, tabs + 2);
+			Utils.addIndentedStringLine(builder, "RIGHT_PAREN ) ", tabs + 1);
+		}
 	}
 }

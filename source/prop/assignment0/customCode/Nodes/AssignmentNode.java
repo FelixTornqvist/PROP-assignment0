@@ -28,6 +28,6 @@ public class AssignmentNode implements INode {
 		Utils.addIndentedStringLine(builder, id.token() + " " + id.value(), tabs + 1);
 		Utils.addIndentedStringLine(builder, "ASSIGN_OP =", tabs + 1);
 
-		expressionNode.buildString(builder, tabs+1);
+		expressionNode.buildString(builder, tabs + 1);
 	}
 }
