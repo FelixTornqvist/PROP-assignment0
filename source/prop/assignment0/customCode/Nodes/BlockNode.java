@@ -23,11 +23,9 @@ public class BlockNode implements INode {
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
 		Utils.addIndentedStringLine(builder, "BlockNode", tabs);
-
 		Utils.addIndentedStringLine(builder, "LEFT_CURLY {", tabs + 1);
 
 		this.statementsChild.buildString(builder, tabs + 2);
-
 		Utils.addIndentedStringLine(builder, "RIGHT_CURLY }", tabs + 1);
 	}
 
