@@ -36,7 +36,7 @@ public class Program {
 				writer.write(builder.toString());
 			}
 			catch (Exception exception) {
-				//System.out.println("EXCEPTION: " + exception);
+				System.out.println("EXCEPTION: " + exception);
 				exception.printStackTrace();
 			}
 			finally {
