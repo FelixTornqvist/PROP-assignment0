@@ -27,17 +27,17 @@ public class TermNode implements INode {
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
 		System.out.println("        term begin: "+((op != null)?op.token():"factor only"));
-
 		Float result = new Float(0);
-
 		Float factor = (Float) factorNode.evaluate(null);
 
-		// only a factor with division would send an argument
-		if(args != null) {
+		if (args != null) {
 			Float parentFac = (Float) args[0];
-			factor = parentFac / factor;
+			System.out.println("----- Parent: " + parentFac + ", this: " + factor);
+			factor =  parentFac / factor;
+			System.out.println("- - -  New: " + factor);
 		}
 
+		// only a factor with division would send an argument
 		if (op != null && termNode != null) {
 			if (op.token() == Token.MULT_OP){
 				Float termEval = (Float) termNode.evaluate(null);
@@ -50,7 +50,6 @@ public class TermNode implements INode {
 		} else {
 			result = factor;
 		}
-
 
 		System.out.println("        term end: "+result);
 		return result;

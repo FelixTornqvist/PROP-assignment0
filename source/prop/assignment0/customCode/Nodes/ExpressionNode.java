@@ -31,24 +31,35 @@ public class ExpressionNode implements INode {
 
 		Float termEval = (Float) termChild.evaluate(null);
 
-		if (op != null && exprChild != null) {
-			Float exprEval = (Float) exprChild.evaluate(null);
+		if (args != null) {
+			termEval = termEval * -1;
+			System.out.println("TermEval: " + termEval);
+		}
 
-			if (op.token() == Token.SUB_OP){
-				result = termEval - exprEval;
-			} else if (op.token() == Token.ADD_OP){
-				result = termEval + exprEval;
+		if (op != null && exprChild != null) {
+			Float exprEval;
+
+			if (op.token() == Token.SUB_OP) {
+				Object[] subtract = new Lexeme[]{op};
+				exprEval = (Float) exprChild.evaluate(subtract);
+			} else {
+				exprEval = (Float) exprChild.evaluate(null);
 			}
+
+			result = termEval + exprEval;
+
 		} else {
 			result = termEval;
 		}
 
-		System.out.println("      expr end: "+result);
+		System.out.println("      expr result " + result);
+
 		return result;
 	}
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
+
 		Utils.addIndentedStringLine(builder, "ExpressionNode", tabs);
 		this.termChild.buildString(builder, tabs + 1);
 
