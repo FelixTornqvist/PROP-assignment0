@@ -26,10 +26,14 @@ public class BlockNode implements INode {
 		statementsChild.evaluate(null);
 
 		for(Map.Entry var : VariableContainer.getKeySet()){
-			ret += var.getKey() + " = " + var.getValue() + '\n';
+			ret += var.getKey() + " = " + roundOneDecimal((Float) var.getValue()) + '\n';
 		}
 
 		return ret;
+	}
+
+	private float roundOneDecimal(float val){
+		return Math.round(val * 10f) / 10f;
 	}
 
 	@Override
