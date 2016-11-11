@@ -27,6 +27,7 @@ public class FactorNode implements INode {
 		Float result = new Float(0);
 
 		if(lexeme != null){
+
 			if(lexeme.token() == Token.IDENT){
 				String varName = lexeme.value().toString();
 				result = VariableContainer.getValue(varName);

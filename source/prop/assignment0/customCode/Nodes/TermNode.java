@@ -30,19 +30,28 @@ public class TermNode implements INode {
 
 		Float result = new Float(0);
 
-		Float factorEval = (Float) factorNode.evaluate(null);
+		Float factor = (Float) factorNode.evaluate(null);
+
+		// only a factor with division would send an argument
+		if(args != null) {
+			Float parentFac = (Float) args[0];
+			factor = parentFac / factor;
+		}
 
 		if (op != null && termNode != null) {
-			Float termEval = (Float) termNode.evaluate(null);
-
 			if (op.token() == Token.MULT_OP){
-				result = factorEval * termEval;
+				Float termEval = (Float) termNode.evaluate(null);
+				result = factor * termEval;
+
 			} else if (op.token() == Token.DIV_OP){
-				result = factorEval / termEval;
+				Object[] childArgs = new Float[]{factor};
+				result = (Float) termNode.evaluate(childArgs);
 			}
 		} else {
-			result = factorEval;
+			result = factor;
 		}
+
+
 		System.out.println("        term end: "+result);
 		return result;
 	}
