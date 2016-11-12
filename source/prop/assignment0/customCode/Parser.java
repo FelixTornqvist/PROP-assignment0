@@ -1,6 +1,6 @@
-/*
-* Authors: Annika Svedin, Felix Törnqvist
-* */
+/**
+ * Authors: Annika Svedin & Felix Törnqvist
+ */
 
 package prop.assignment0.customCode;
 
@@ -12,26 +12,28 @@ import java.io.IOException;
 public class Parser implements IParser {
 	private Tokenizer tokenizer;
 
-	public Parser() {
-
-	}
-
 	@Override
 	public void open(String fileName) throws IOException, TokenizerException {
 		tokenizer = new Tokenizer();
 		tokenizer.open(fileName);
-
 	}
 
 	@Override
 	public INode parse() throws IOException, TokenizerException, ParserException {
 		tokenizer.moveNext();
+		if (tokenizer == null) {
+			throw new IOException("File not available");
+		}
 		return parseBlockNode();
 	}
 
 	@Override
 	public void close() throws IOException {
-
+		if (tokenizer != null) {
+			tokenizer.close();
+		} else {
+			throw new IOException("Unable to close the parser");
+		}
 	}
 
 	private BlockNode parseBlockNode() throws IOException, TokenizerException, ParserException {
@@ -50,9 +52,7 @@ public class Parser implements IParser {
 		} else {
 			throw new ParserException("Left curly bracket missing");
 		}
-
 		return blockNode;
-
 	}
 
 	private StatementsNode parseStatementsNode() throws IOException, TokenizerException, ParserException {
@@ -83,7 +83,6 @@ public class Parser implements IParser {
 				throw new ParserException("Semicolon not found");
 			}
 		}
-
 		return null;
 	}
 
@@ -128,12 +127,11 @@ public class Parser implements IParser {
 				return new FactorNode(expressionNode);
 
 			} else {
-			throw new ParserException("Right parenthesis not found");
+				throw new ParserException("Right parenthesis not found");
 			}
 
 		} else {
 			throw new ParserException("Factor not found");
 		}
-
 	}
 }

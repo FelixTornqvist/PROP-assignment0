@@ -1,13 +1,11 @@
 /**
- * Authors: Annika Svedin, Felix Törnqvist
+ * Authors: Annika Svedin & Felix Törnqvist
  */
 
 package prop.assignment0.customCode;
 
 import prop.assignment0.*;
-
 import java.io.IOException;
-
 
 public class Tokenizer implements ITokenizer {
 
@@ -19,8 +17,6 @@ public class Tokenizer implements ITokenizer {
 		scanner = new Scanner();
 		scanner.open(fileName);
 		scanner.moveNext();
-
-
 	}
 
 	@Override
@@ -30,7 +26,7 @@ public class Tokenizer implements ITokenizer {
 
 	@Override
 	public void moveNext() throws IOException, TokenizerException {
-		while(Character.isWhitespace(scanner.current())){
+		while (Character.isWhitespace(scanner.current())) {
 			scanner.moveNext();
 		}
 
@@ -39,7 +35,7 @@ public class Tokenizer implements ITokenizer {
 			return;
 		}
 
-		switch (scanner.current()){
+		switch (scanner.current()) {
 			case '{':
 				current = new Lexeme("{", Token.LEFT_CURLY);
 				scanner.moveNext();
@@ -112,6 +108,10 @@ public class Tokenizer implements ITokenizer {
 
 	@Override
 	public void close() throws IOException {
-
+		if (scanner != null) {
+			scanner.close();
+		} else {
+			throw new IOException("Unable to close the scanner");
+		}
 	}
 }

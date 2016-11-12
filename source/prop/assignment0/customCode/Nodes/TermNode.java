@@ -1,6 +1,6 @@
-/*
-* Authors: Annika Svedin, Felix Törnqvist
-* */
+/**
+ * Authors: Annika Svedin, Felix Törnqvist
+ */
 
 package prop.assignment0.customCode.Nodes;
 
@@ -26,24 +26,24 @@ public class TermNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		System.out.println("        term begin: "+((op != null)?op.token():"factor only"));
+		System.out.println("        term begin: " + ((op != null) ? op.token() : "factor only"));
 		Float result = new Float(0);
 		Float factor = (Float) factorNode.evaluate(null);
 
 		if (args != null) {
 			Float parentFac = (Float) args[0];
 			System.out.println("----- Parent: " + parentFac + ", this: " + factor);
-			factor =  parentFac / factor;
+			factor = parentFac / factor;
 			System.out.println("- - -  New: " + factor);
 		}
 
 		// only a factor with division would send an argument
 		if (op != null && termNode != null) {
-			if (op.token() == Token.MULT_OP){
+			if (op.token() == Token.MULT_OP) {
 				Float termEval = (Float) termNode.evaluate(null);
 				result = factor * termEval;
 
-			} else if (op.token() == Token.DIV_OP){
+			} else if (op.token() == Token.DIV_OP) {
 				Object[] childArgs = new Float[]{factor};
 				result = (Float) termNode.evaluate(childArgs);
 			}
@@ -51,7 +51,7 @@ public class TermNode implements INode {
 			result = factor;
 		}
 
-		System.out.println("        term end: "+result);
+		System.out.println("        term end: " + result);
 		return result;
 	}
 
@@ -67,6 +67,5 @@ public class TermNode implements INode {
 				termNode.buildString(builder, tabs + 1);
 			}
 		}
-
 	}
 }

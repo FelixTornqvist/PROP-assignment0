@@ -1,10 +1,9 @@
-/*
-* Authors: Annika Svedin, Felix Törnqvist
+/**
+* Authors: Annika Svedin & Felix Törnqvist
 * */
 
 package prop.assignment0.customCode.Nodes;
 
-import prop.assignment0.customCode.VariableContainer;
 import prop.assignment0.INode;
 
 public class StatementsNode implements INode {
@@ -24,7 +23,7 @@ public class StatementsNode implements INode {
 	public Object evaluate(Object[] args) throws Exception {
 		System.out.println("statement begin");
 
-		if(assignmentNode != null && statementsNode != null) {
+		if (assignmentNode != null && statementsNode != null) {
 			assignmentNode.evaluate(null);
 			statementsNode.evaluate(null);
 		}
@@ -41,8 +40,5 @@ public class StatementsNode implements INode {
 			assignmentNode.buildString(builder, tabs + 1);
 			statementsNode.buildString(builder, tabs + 1);
 		}
-
-
-
 	}
 }

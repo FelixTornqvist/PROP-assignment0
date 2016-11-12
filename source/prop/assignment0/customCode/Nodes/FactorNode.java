@@ -1,6 +1,6 @@
-/*
-* Authors: Annika Svedin, Felix Törnqvist
-* */
+/**
+ * Authors: Annika Svedin & Felix Törnqvist
+ * */
 
 package prop.assignment0.customCode.Nodes;
 

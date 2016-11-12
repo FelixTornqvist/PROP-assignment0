@@ -1,8 +1,8 @@
-package prop.assignment0.customCode.Nodes;
-
 /**
- * Created by Annika Svedin and Felix Törnqvist.
- */
+ * Authors: Annika Svedin & Felix Törnqvist
+ * */
+
+package prop.assignment0.customCode.Nodes;
 
 public class Utils {
 
