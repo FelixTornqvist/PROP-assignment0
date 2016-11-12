@@ -41,14 +41,11 @@ public class Parser implements IParser {
 
 		if (tokenizer.current().token() == Token.LEFT_CURLY) {
 			StatementsNode statementNode = parseStatementsNode();
-
 			if (tokenizer.current().token() == Token.RIGHT_CURLY) {
 				blockNode = new BlockNode(statementNode);
-
 			} else {
 				throw new ParserException("Right curly bracket missing");
 			}
-
 		} else {
 			throw new ParserException("Left curly bracket missing");
 		}

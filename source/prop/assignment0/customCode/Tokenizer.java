@@ -30,7 +30,7 @@ public class Tokenizer implements ITokenizer {
 			scanner.moveNext();
 		}
 
-		if (scanner.current() == scanner.EOF) {
+		if (scanner.current() == Scanner.EOF) {
 			current = new Lexeme("EOF", Token.EOF);
 			return;
 		}

@@ -11,7 +11,6 @@ public class StatementsNode implements INode {
 	private StatementsNode statementsNode;
 
 	public StatementsNode() {
-
 	}
 
 	public StatementsNode(AssignmentNode assignmentNode, StatementsNode statementsNode) {
@@ -21,14 +20,10 @@ public class StatementsNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		System.out.println("statement begin");
-
 		if (assignmentNode != null && statementsNode != null) {
 			assignmentNode.evaluate(null);
 			statementsNode.evaluate(null);
 		}
-
-		System.out.println("statement end");
 		return null;
 	}
 

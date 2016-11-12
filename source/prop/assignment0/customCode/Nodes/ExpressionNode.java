@@ -26,14 +26,11 @@ public class ExpressionNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		System.out.println("      expr begin: "+((op != null)?op.token():"term only"));
-		Float result = new Float(0);
-
+		Float result;
 		Float termEval = (Float) termChild.evaluate(null);
 
 		if (args != null) {
 			termEval = termEval * -1;
-			System.out.println("TermEval: " + termEval);
 		}
 
 		if (op != null && exprChild != null) {
@@ -47,19 +44,14 @@ public class ExpressionNode implements INode {
 			}
 
 			result = termEval + exprEval;
-
 		} else {
 			result = termEval;
 		}
-
-		System.out.println("      expr result " + result);
-
 		return result;
 	}
 
 	@Override
 	public void buildString(StringBuilder builder, int tabs) {
-
 		Utils.addIndentedStringLine(builder, "ExpressionNode", tabs);
 		this.termChild.buildString(builder, tabs + 1);
 

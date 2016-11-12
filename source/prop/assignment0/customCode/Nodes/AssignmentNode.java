@@ -20,13 +20,8 @@ public class AssignmentNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		System.out.println("    assign begin: "+id.value());
-
 		Float exprEval = (Float) expressionNode.evaluate(null);
-
 		VariableContainer.setValue(id.value().toString(), exprEval);
-
-		System.out.println("    assign end: "+exprEval);
 		return null;
 	}
 

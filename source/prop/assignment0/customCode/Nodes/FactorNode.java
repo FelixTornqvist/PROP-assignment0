@@ -23,23 +23,18 @@ public class FactorNode implements INode {
 
 	@Override
 	public Object evaluate(Object[] args) throws Exception {
-		System.out.println("          factor begin: "+((lexeme != null)?lexeme.value():""));
 		Float result = new Float(0);
 
-		if(lexeme != null){
-
-			if(lexeme.token() == Token.IDENT){
+		if (lexeme != null) {
+			if (lexeme.token() == Token.IDENT) {
 				String varName = lexeme.value().toString();
 				result = VariableContainer.getValue(varName);
 			} else if (lexeme.token() == Token.INT_LIT){
 				result = (Float) lexeme.value();
 			}
-
-		}else if(exprChild != null){
+		} else if(exprChild != null) {
 			result = (Float) exprChild.evaluate(null);
 		}
-
-		System.out.println("          factor end: "+result);
 		return result;
 	}
 
