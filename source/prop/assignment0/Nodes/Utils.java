@@ -2,7 +2,7 @@
  * Authors: Annika Svedin & Felix Törnqvist
  * */
 
-package prop.assignment0.customCode.Nodes;
+package prop.assignment0.Nodes;
 
 public class Utils {
 

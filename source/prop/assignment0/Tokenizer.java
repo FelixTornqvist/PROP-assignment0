@@ -2,7 +2,7 @@
  * Authors: Annika Svedin & Felix Törnqvist
  */
 
-package prop.assignment0.customCode;
+package prop.assignment0;
 
 import prop.assignment0.*;
 import java.io.IOException;

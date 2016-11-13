@@ -2,7 +2,7 @@
  * Authors: Annika Svedin, Felix Törnqvist
  */
 
-package prop.assignment0.customCode.Nodes;
+package prop.assignment0.Nodes;
 
 import prop.assignment0.INode;
 import prop.assignment0.Lexeme;
