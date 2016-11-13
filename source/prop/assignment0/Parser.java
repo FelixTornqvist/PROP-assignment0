@@ -30,8 +30,6 @@ public class Parser implements IParser {
 	public void close() throws IOException {
 		if (tokenizer != null) {
 			tokenizer.close();
-		} else {
-			throw new IOException("Unable to close the parser");
 		}
 	}
 

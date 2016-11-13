@@ -110,8 +110,6 @@ public class Tokenizer implements ITokenizer {
 	public void close() throws IOException {
 		if (scanner != null) {
 			scanner.close();
-		} else {
-			throw new IOException("Unable to close the scanner");
 		}
 	}
 }
