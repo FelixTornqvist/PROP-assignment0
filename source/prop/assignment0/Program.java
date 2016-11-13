@@ -1,7 +1,5 @@
 package prop.assignment0;
 
-import prop.assignment0.customCode.Parser;
-
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
@@ -37,7 +35,6 @@ public class Program {
 			}
 			catch (Exception exception) {
 				System.out.println("EXCEPTION: " + exception);
-				exception.printStackTrace();
 			}
 			finally {
 				if (parser != null)
