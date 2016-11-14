@@ -35,7 +35,7 @@ public class BlockNode implements INode {
 		Utils.addIndentedStringLine(builder, "BlockNode", tabs);
 		Utils.addIndentedStringLine(builder, "LEFT_CURLY {", tabs + 1);
 
-		this.statementsChild.buildString(builder, tabs + 2);
+		this.statementsChild.buildString(builder, tabs + 1);
 		Utils.addIndentedStringLine(builder, "RIGHT_CURLY }", tabs + 1);
 	}
 }
